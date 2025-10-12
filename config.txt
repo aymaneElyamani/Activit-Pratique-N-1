@@ -1,0 +1,2 @@
+net.aymane.ext.DaoImplV2
+net.aymane.metier.MetierImpl

@@ -8,22 +8,18 @@ import java.util.Scanner;
 
 public class Pres2 {
     public static void main(String[] args) throws Exception {
+        Scanner scanner = new Scanner(new File("config.txt"));
 
-        // Lecture du fichier de configuration
-        try (Scanner scanner = new Scanner(new File("config.txt"))) {
+        String daoClassName = scanner.nextLine();
+        Class cDao = Class.forName(daoClassName);
+        IDao dao= (IDao) cDao.newInstance();
 
-            //Lecture de la classe DAO
-            String daoClassName = scanner.nextLine().trim();
-            Class<?> cDao = Class.forName(daoClassName);
-            IDao dao = (IDao) cDao.getDeclaredConstructor().newInstance();
+        String metierClassName = scanner.nextLine();
+        Class cMetier = Class.forName(metierClassName);
+        IMetier metier = (IMetier) cMetier.getConstructor(IDao.class).newInstance(dao);
 
-            //Lecture de la classe Metier
-            String metierClassName = scanner.nextLine().trim();
-            Class<?> cMetier = Class.forName(metierClassName);
-            IMetier metier = (IMetier) cMetier.getConstructor(IDao.class).newInstance(dao);
+        System.out.println("RES= "+metier.calcul());
 
-            //Affichage du résultat
-            System.out.println("Res = " + metier.calcul());
-        }
+
     }
 }
