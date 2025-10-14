@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service("metier")
+@Component
 public class MetierImpl implements IMetier {
     private IDao dao; // Couplage faible
 
-    public MetierImpl(IDao dao) {
+    @Autowired
+    public MetierImpl(@Qualifier("d2") IDao dao) {
         this.dao = dao;
     }
 
