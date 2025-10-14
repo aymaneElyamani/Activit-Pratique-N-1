@@ -1,7 +1,12 @@
 package net.aymane.metier;
 
 import net.aymane.dao.IDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service("metier")
 public class MetierImpl implements IMetier {
     private IDao dao; // Couplage faible
 
